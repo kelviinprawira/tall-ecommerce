@@ -32,11 +32,12 @@ class BrandResource extends Resource
                             ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug
                             ($state))),
                         Forms\Components\TextInput::make('slug')->required()
+                            ->disabled()
                             ->dehydrated()
                             ->unique(Brand::class, 'slug',
                                 ignoreRecord: true)
                     ]),
-                    Forms\Components\FileUpload::make('image')->image()->directory('categories'),
+                    Forms\Components\FileUpload::make('image')->image()->directory('brands'),
                     Forms\Components\Toggle::make('is_active')
                         ->default(true)
                         ->required(),
