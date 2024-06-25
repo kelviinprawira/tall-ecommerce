@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'GEGE STORE' }}</title>
-    @vite(['resources/js/app.js','resources/css/app.js'])
+    @vite(['resources/js/app.js','resources/css/app.css'])
     @livewireStyles
 </head>
 <body class="bg-slate-200 dark:bg-slate-700">
+<livewire:partials.navbar/>
 <main>
     {{ $slot }}
 </main>
+<livewire:partials.footer/>
 @livewireScripts
 </body>
 </html>
