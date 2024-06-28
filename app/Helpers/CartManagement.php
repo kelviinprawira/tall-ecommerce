@@ -12,6 +12,7 @@ class CartManagement
     static public function addItemToCart($product_id)
     {
         $cart_items = self::getCartItemsFriomCookie();
+        $existing_item = null;
         foreach ($cart_items as $key => $item) {
             if ($item['product_id'] == $product_id) {
                 $existing_item = $key;
