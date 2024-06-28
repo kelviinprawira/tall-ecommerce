@@ -10,7 +10,9 @@
                             @foreach($categories as $category)
                                 <li class="mb-4" wire:key="{{$category->id}}">
                                     <label for="{{$category->slug}}" class="flex items-center dark:text-gray-400 ">
-                                        <input type="checkbox" id="{{$category->slug}}" value="{{$category->id}}"
+                                        <input type="checkbox" wire:model.live="selectedCategory"
+                                               id="{{$category->slug}}"
+                                               value="{{$category->id}}"
                                                class="w-4 h-4
                                         mr-2">
                                         <span class="text-lg">{{$category->name}}</span>
@@ -27,7 +29,9 @@
                             @foreach($brands as $brand)
                                 <li class="mb-4" wire:key="{{$brand->id}}">
                                     <label for="{{$brand->slug}}" class="flex items-center dark:text-gray-300">
-                                        <input type="checkbox" id="{{$brand->slug}}" value="{{$brand->slug}}" class="w-4
+                                        <input type="checkbox" wire:model.live="selectedBrand" id="{{$brand->slug}}"
+                                               value="{{$brand->id}}"
+                                               class="w-4
                                         h-4
                                         mr-2">
                                         <span class="text-lg dark:text-gray-400">{{$brand->name}}</span>
@@ -41,9 +45,19 @@
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <ul>
                             <li class="mb-4">
-                                <label for="" class="flex items-center dark:text-gray-300">
-                                    <input type="checkbox" class="w-4 h-4 mr-2">
-                                    <span class="text-lg dark:text-gray-400">In Stock</span>
+                                <label for=featured" class="flex items-center dark:text-gray-300">
+                                    <input type="checkbox" wire:model.live="featured" id="featured" value="1"
+                                           class="w-4 h-4
+                                    mr-2">
+                                    <span class="text-lg dark:text-gray-400">Featured Product</span>
+                                </label>
+                            </li>
+                            <li class="mb-4">
+                                <label for="on_sale" class="flex items-center dark:text-gray-300">
+                                    <input type="checkbox" wire:model.live="on_sale" id="on_sale" value="1"
+                                           class="w-4 h-4
+                                    mr-2">
+                                    <span class="text-lg dark:text-gray-400">On Sale Product</span>
                                 </label>
                             </li>
                         </ul>
@@ -53,12 +67,18 @@
                         <h2 class="text-2xl font-bold dark:text-gray-400">Price</h2>
                         <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
                         <div>
+                            <div
+                                class="dark:text-white mb-5 font-semibold">{{\Illuminate\Support\Number::currency
+                                ($price_range, 'IDR')
+                                }}</div>
                             <input type="range"
                                    class="w-full h-1 mb-4 bg-blue-100 rounded appearance-none cursor-pointer"
-                                   max="500000" value="100000" step="100000">
+                                   max="1000000" value="100000" step="1000" wire:model.live="price_range">
                             <div class="flex justify-between ">
-                                <span class="inline-block text-lg font-bold text-blue-400 ">&#8377; 1000</span>
-                                <span class="inline-block text-lg font-bold text-blue-400 ">&#8377; 500000</span>
+                                <span class="inline-block text-lg font-bold text-blue-400
+                                ">{{\Illuminate\Support\Number::currency(1000, 'IDR')}}</span>
+                                <span class="inline-block text-lg font-bold text-blue-400
+                                ">{{\Illuminate\Support\Number::currency(1000000, 'IDR')}}</span>
                             </div>
                         </div>
                     </div>
