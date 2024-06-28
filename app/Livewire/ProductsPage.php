@@ -27,6 +27,9 @@ class ProductsPage extends Component
     #[Url]
     public $price_range = 100000;
 
+    #[Url]
+    public $sort = 'latest';
+
     public function render()
     {
         $productsQuery = Product::where('is_active', 1);
@@ -45,6 +48,12 @@ class ProductsPage extends Component
         }
         if ($this->price_range) {
             $productsQuery->whereBetween('price', [0, $this->price_range]);
+        }
+        if ($this->sort == 'latest') {
+            $productsQuery->latest();
+        }
+        if ($this->sort == 'price') {
+            $productsQuery->orderBy('price', 'asc');
         }
         $brands = Brand::where('is_active', 1)->get(['id', 'name', 'slug']);
         $categories = Category::where('is_active', 1)->get(['id', 'name', 'slug']);
